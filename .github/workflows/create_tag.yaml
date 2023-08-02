@@ -24,6 +24,7 @@ jobs:
       - name: tagging
         env:
           TZ: Asia/Tokyo
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           DATE=`date +"%Y%m%d"`
           TAG_NAME="release-$DATE${{ github.event.inputs.tag_name }}"
