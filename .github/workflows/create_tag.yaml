@@ -27,6 +27,5 @@ jobs:
         run: |
           DATE=`date +"%Y%m%d"`
           TAG_NAME="release-$DATE{{ github.event.inputs.tag_name }}"
-
           git tag -a $TAG_NAME -m {{ github.event.inputs.url }}
           git push origin $TAG_NAME
