@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       release_count:
-        description: 'Release count'
+        description: 'count'
         required: true
         type: string
         default: '01'
-      url:
+      kibela_url:
         description: 'URL'
         required: true
         type: string
@@ -20,13 +20,15 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
         with:
-          ref: master
+          ref: ${{ github.event.inputs.branch }}
       - name: tagging
         env:
           TZ: Asia/Tokyo
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           DATE=`date +"%Y%m%d"`
-          TAG_NAME="release-$DATE${{ github.event.inputs.tag_name }}"
-          git tag -a "$TAG_NAME" -m  "${{ github.event.inputs.url }}"
+          TAG_NAME="sample-$DATE${{ github.event.inputs.tag_name }}"
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git tag -a "$TAG_NAME" -m  "${{ github.event.inputs.kibela_url }}"
           git push origin "$TAG_NAME"
