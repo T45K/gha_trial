@@ -7,7 +7,7 @@ on:
         description: 'Tag name'
         required: true
         type: string
-        default: 'release-'${{ steps.get_date.outputs.date }}'01'
+        default: 'release-'${{ steps.get_date.outputs.date }}
 
 jobs:
   build:
