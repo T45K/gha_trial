@@ -3,11 +3,15 @@ name: create tag
 on:
   workflow_dispatch:
     inputs:
-      tag_name:
-        description: 'Tag name'
+      release_count:
+        description: 'Release count'
         required: true
         type: string
-        default: ${{ steps.get_date.outputs.date }}
+        default: 01
+      url:
+        description: 'URL'
+        required: true
+        type: string
 
 jobs:
   build:
@@ -18,5 +22,10 @@ jobs:
         with:
           ref: master
       - name: tagging
+        env:
+          TZ: Asia/Tokyo
         run: |
-          git add .
+          DATE=`date+"%Y%m%d"`
+          TAG_NAME="release-$DATE{{ github.event.inputs.tag_name }}"
+          git tag -a $TAG_NAME -m {{ github.event.inputs.url }}
+          git push origin $TAG_NAME
