@@ -13,7 +13,7 @@ jobs:
         with:
           payload: |
             {
-              "text": "Hoge"
+              "text": "${{ github.event.pull_request.html_url }}"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
