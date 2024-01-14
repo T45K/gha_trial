@@ -13,7 +13,7 @@ jobs:
         with:
           payload: |
             {
-              "text": Hoge
+              "text": "Hoge"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
