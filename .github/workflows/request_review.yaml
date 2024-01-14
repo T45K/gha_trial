@@ -1,0 +1,20 @@
+name: request review
+
+on:
+  pull_request:
+    types: [ ready_for_review ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send message
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: |
+            {
+              "text": Hoge
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
